@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: ai-interview-planner
+    env: node
+    region: oregon   # or frankfurt, singapore — pick closest to you
+    plan: free       # use 'starter' for always-on (paid)
+    rootDir: backend
+    buildCommand: npm install && npm run build
+    startCommand: node server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: MONGODB_URI
+        sync: false   # You will set this manually in the Render dashboard
+      - key: JWT_SECRET
+        sync: false   # You will set this manually in the Render dashboard
+      - key: LLM_API_KEY
+        sync: false   # You will set this manually in the Render dashboard
