@@ -71,18 +71,18 @@ const Roadmap = () => {
 
   if (!roadmap || !roadmap.modules || roadmap.modules.length === 0) {
     return (
-      <div class="p-6 max-w-3xl mx-auto text-center space-y-6">
-        <div class="p-6 rounded-3xl bg-white dark:bg-darkbg-800 border border-gray-200 dark:border-darkbg-700 space-y-4 shadow-sm flex flex-col items-center">
-          <div class="p-4 bg-yellow-500/10 text-yellow-600 rounded-2xl">
+      <div className="p-6 max-w-3xl mx-auto text-center space-y-6">
+        <div className="p-6 rounded-3xl bg-white dark:bg-darkbg-800 border border-gray-200 dark:border-darkbg-700 space-y-4 shadow-sm flex flex-col items-center">
+          <div className="p-4 bg-yellow-500/10 text-yellow-600 rounded-2xl">
             <FileWarning size={32} />
           </div>
-          <h2 class="text-xl font-bold text-gray-800 dark:text-gray-200">Study Path Not Generated</h2>
-          <p class="text-xs text-gray-400 max-w-md leading-relaxed">
+          <h2 className="text-xl font-bold text-gray-800 dark:text-gray-200">Study Path Not Generated</h2>
+          <p className="text-xs text-gray-400 max-w-md leading-relaxed">
             Your personalized study roadmap is compiled based on your resume scan and identified skill gaps. Please scan your resume PDF first.
           </p>
           <Link
             to="/resume"
-            class="px-5 py-2.5 bg-primary-500 hover:bg-primary-600 text-white font-bold rounded-xl text-xs shadow-md transition-colors"
+            className="px-5 py-2.5 bg-primary-500 hover:bg-primary-600 text-white font-bold rounded-xl text-xs shadow-md transition-colors"
           >
             Scan Resume PDF
           </Link>
@@ -92,88 +92,88 @@ const Roadmap = () => {
   }
 
   return (
-    <div class="p-6 max-w-4xl mx-auto space-y-6">
+    <div className="p-6 max-w-4xl mx-auto space-y-6 z-10 relative">
       {/* Header Panel */}
-      <div class="p-6 rounded-3xl border border-gray-200 dark:border-darkbg-700 bg-white dark:bg-darkbg-800 shadow-sm space-y-4">
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="p-6 rounded-3xl border border-gray-250/20 dark:border-darkbg-700/60 bg-white/70 dark:bg-darkbg-800/80 shadow-sm space-y-4">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
-            <h1 class="text-3xl font-extrabold text-gray-800 dark:text-gray-100 flex items-center gap-2">
-              Personalized Study Path <Sparkles class="text-primary-500 animate-pulse" size={24} />
+            <h1 className="text-3xl font-extrabold text-gray-800 dark:text-gray-150 tracking-tight flex items-center gap-2">
+              Personalized Study Path <Sparkles className="text-primary-500 animate-pulse" size={24} />
             </h1>
-            <p class="text-sm text-gray-400 mt-1">
-              Custom modules generated to fill skill gaps for <span class="font-bold underline text-primary-500">{roadmap.role}</span>.
+            <p className="text-xs text-gray-450 mt-1.5 leading-relaxed">
+              Custom modules generated to fill skill gaps for <span className="font-bold underline text-primary-500">{roadmap.role}</span>.
             </p>
           </div>
-          <div class="text-right">
-            <span class="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider">Overall Progress</span>
-            <h3 class="text-3xl font-extrabold text-primary-500 mt-0.5">{progress}%</h3>
+          <div className="text-right">
+            <span className="text-[9px] font-extrabold text-gray-400 dark:text-gray-500 uppercase tracking-widest block">Overall Progress</span>
+            <h3 className="text-3xl font-black text-primary-500 mt-0.5 leading-none">{progress}%</h3>
           </div>
         </div>
 
         {/* Global Progress Bar */}
-        <div class="w-full h-3 bg-gray-100 dark:bg-darkbg-700 rounded-full overflow-hidden">
+        <div className="w-full h-3 bg-gray-150/40 dark:bg-darkbg-700/60 rounded-full overflow-hidden border border-gray-200/5 dark:border-white/5">
           <div 
-            class="h-full bg-gradient-to-r from-primary-500 to-indigo-500 transition-all duration-500" 
+            className="h-full bg-gradient-to-r from-primary-500 via-indigo-500 to-accent-violet transition-all duration-750 ease-out" 
             style={{ width: `${progress}%` }}
           />
         </div>
       </div>
 
       {/* Vertical Roadmap Timeline */}
-      <div class="relative pl-6 md:pl-8 border-l-2 border-gray-200 dark:border-darkbg-700 space-y-8 py-2">
+      <div className="relative pl-6 md:pl-8 border-l-2 border-gray-250/30 dark:border-darkbg-700/60 space-y-8 py-4">
         {roadmap.modules.map((mod, modIdx) => (
           <motion.div
-            initial={{ opacity: 0, x: -10 }}
+            initial={{ opacity: 0, x: -15 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: modIdx * 0.1 }}
+            transition={{ duration: 0.5, delay: modIdx * 0.1 }}
             key={mod._id}
-            class="relative space-y-4"
+            className="relative space-y-4"
           >
             {/* Timeline Marker Pin */}
-            <span class={`absolute -left-[37px] md:-left-[45px] top-1.5 p-1 rounded-full border-2 
+            <span className={`absolute -left-[37px] md:-left-[45px] top-1.5 p-1 rounded-full border-2 transition-colors duration-300 shadow-sm
               ${mod.status === 'completed' 
-                ? 'bg-green-500 border-green-200 dark:border-green-950 text-white' 
+                ? 'bg-green-500 border-green-200 dark:border-green-950 text-white shadow-green-500/10' 
                 : (mod.status === 'in-progress' 
-                  ? 'bg-primary-500 border-primary-200 dark:border-primary-950 text-white' 
-                  : 'bg-white dark:bg-darkbg-800 border-gray-300 dark:border-darkbg-700 text-gray-400')
+                  ? 'bg-primary-500 border-primary-200 dark:border-primary-950 text-white shadow-primary-500/10 animate-pulse' 
+                  : 'bg-white dark:bg-darkbg-800 border-gray-300 dark:border-darkbg-700 text-gray-450')
               }
             `}>
               <MapPin size={16} />
             </span>
 
             {/* Stage Title / Week */}
-            <div class="flex items-center gap-3">
-              <span class="px-2.5 py-1 rounded-lg bg-primary-500/10 border border-primary-500/20 text-[10px] font-extrabold text-primary-500 uppercase tracking-wider flex items-center gap-1">
+            <div className="flex items-center gap-3">
+              <span className="px-2.5 py-1 rounded-lg bg-primary-500/10 border border-primary-500/20 text-[9px] font-extrabold text-primary-500 uppercase tracking-widest flex items-center gap-1.5">
                 <Calendar size={12} /> {mod.duration}
               </span>
-              <h2 class="text-xl font-bold text-gray-800 dark:text-gray-100">{mod.title}</h2>
+              <h2 className="text-lg font-extrabold text-gray-800 dark:text-gray-150 tracking-tight">{mod.title}</h2>
             </div>
 
             {/* Module Card */}
-            <div class="p-6 rounded-2xl border border-gray-200 dark:border-darkbg-700 bg-white dark:bg-darkbg-800 shadow-sm space-y-4">
-              <p class="text-xs text-gray-600 dark:text-gray-300 leading-relaxed">{mod.description}</p>
+            <div className="p-6 rounded-3xl border border-gray-250/20 dark:border-darkbg-700/60 bg-white/70 dark:bg-darkbg-800/80 shadow-sm space-y-5 glass-interactive">
+              <p className="text-xs text-gray-600 dark:text-gray-350 leading-relaxed font-semibold">{mod.description}</p>
               
-              <div class="border-t border-gray-100 dark:border-darkbg-700 pt-4 space-y-4">
-                <h4 class="text-[10px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider">Topics Checklist</h4>
+              <div className="border-t border-gray-150/20 dark:border-darkbg-700/50 pt-4 space-y-4">
+                <h4 className="text-[9px] font-extrabold text-gray-400 dark:text-gray-550 uppercase tracking-widest pl-1">Topics Checklist</h4>
                 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {mod.topics?.map((topic) => (
                     <div 
                       key={topic._id} 
-                      class="p-4 rounded-xl border border-gray-50 dark:border-darkbg-900 bg-gray-50/50 dark:bg-darkbg-900/30 flex items-start gap-3 hover:border-primary-500/30 transition-all group"
+                      className="p-4 rounded-2xl border border-gray-150/10 dark:border-darkbg-900/60 bg-gray-50/30 dark:bg-darkbg-900/30 flex items-start gap-3.5 hover:border-primary-500/20 transition-all duration-300 group"
                     >
                       <input
                         type="checkbox"
                         checked={topic.completed}
                         onChange={() => handleTopicCheck(mod._id, topic._id, topic.completed)}
-                        class="h-4.5 w-4.5 rounded border-gray-300 dark:border-darkbg-700 text-primary-500 focus:ring-primary-500 dark:focus:ring-primary-500/50 mt-0.5 cursor-pointer accent-primary-500"
+                        className="h-5 w-5 rounded-lg border-gray-350 dark:border-darkbg-700/60 text-primary-500 focus:ring-primary-500/30 dark:focus:ring-primary-500/20 mt-0.5 cursor-pointer accent-primary-500 transition-all"
                       />
-                      <div class="space-y-2 flex-1">
-                        <span class={`text-xs font-semibold leading-none cursor-pointer select-none transition-all
+                      <div className="space-y-2.5 flex-1">
+                        <span className={`text-xs font-bold leading-relaxed cursor-pointer select-none transition-all
                           ${topic.completed 
-                            ? 'text-gray-400 dark:text-gray-500 line-through' 
-                            : 'text-gray-700 dark:text-gray-300 group-hover:text-primary-500'
+                            ? 'text-gray-400 dark:text-gray-550 line-through font-semibold' 
+                            : 'text-gray-700 dark:text-gray-250 group-hover:text-primary-500'
                           }`}
                           onClick={() => handleTopicCheck(mod._id, topic._id, topic.completed)}
                         >
@@ -182,20 +182,20 @@ const Roadmap = () => {
 
                         {/* Resource links under topic */}
                         {topic.resources && topic.resources.length > 0 && (
-                          <div class="space-y-1.5 pt-1.5 border-t border-gray-100 dark:border-darkbg-700/50">
-                            <span class="text-[9px] font-bold text-gray-400 uppercase tracking-wider flex items-center gap-1">
-                              <BookOpen size={10} /> Resources
+                          <div className="space-y-2 pt-2 border-t border-gray-150/10 dark:border-darkbg-700/40">
+                            <span className="text-[9px] font-extrabold text-gray-450 uppercase tracking-widest flex items-center gap-1">
+                              <BookOpen size={10} className="text-primary-500" /> Resources
                             </span>
-                            <div class="space-y-1">
+                            <div className="flex flex-wrap gap-1.5">
                               {topic.resources.map((res, resIdx) => (
                                 <a
                                   key={resIdx}
                                   href={`https://www.google.com/search?q=${encodeURIComponent(res)}`}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  class="text-[10px] font-medium text-primary-500 hover:underline flex items-center gap-1 w-fit"
+                                  className="text-[10px] font-bold text-primary-500 hover:text-primary-600 px-2 py-0.5 rounded bg-primary-55/10 dark:bg-primary-500/5 hover:bg-primary-500/10 border border-primary-500/10 flex items-center gap-1 transition-all"
                                 >
-                                  {res} <ExternalLink size={10} />
+                                  {res} <ExternalLink size={8} />
                                 </a>
                               ))}
                             </div>
